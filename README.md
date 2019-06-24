@@ -1,2 +1,2 @@
 # cdnf-card-dict
-如题..
+如题...
