@@ -76,4 +76,6 @@ for i in img:
         res_i[e.filename] = classfiy_aHash(i, e, size=(206, 268))
     s_res = {k: v for k, v in sorted(res_i.items(), key=lambda x: x[1])}
     print(i.filename, list(s_res)[0])
- 
+    # bd online ocr 出game_image_des的文字存json
+    # ['xxx.png':
+    # {'ex_image':'monster_card_ex/xxx.png','des':{'properties':'xxx','name':'xxx',''}},]
