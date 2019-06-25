@@ -5,6 +5,10 @@ import os
 import matplotlib.pyplot as plt
 import time
 import collections
+import requests
+import base64
+from io import BytesIO
+import json
 
 img = []
 img_ex = []
@@ -58,7 +62,7 @@ def classfiy_aHash(image1, image2, size=(8, 8)):
     return res
 
 # print(time.time())
-# print(classfiy_aHash(Image.open("398.png"),Image.open("492.png"),size=(206,268),exact=10000))
+# print(classfiy_aHash(Image.open("398.png"),Image.open("492.png"),size=(206,268)))
 # print(time.time())
 
 
@@ -69,13 +73,63 @@ def load_image():
         img_ex.append(Image.open("./monster_card_ex/"+f))
 
 
+def image_to_base64(image_path):
+    img = Image.open(image_path)
+    output_buffer = BytesIO()
+    img.save(output_buffer, format='JPEG')
+    byte_data = output_buffer.getvalue()
+    base64_str = base64.b64encode(byte_data)
+    return base64_str
+
+
+def save_json(data):
+    with open('./image_info.json', 'w') as json_file:
+        json_file.write(json.dumps(data))
+
+
+def load_json():
+    with open('./image_info.json') as json_file:
+        try:
+            data = json.load(json_file)
+        except:
+            data = {}
+        return data
+
+
+data = {
+    'image': '',
+    'language_type': 'CHN_ENG',
+    'detect_direction': 'false',
+    'detect_language': 'false',
+    'probability': 'true'
+}
+
+
 load_image()
 for i in img:
     res_i = {}
     for e in img_ex:
         res_i[e.filename] = classfiy_aHash(i, e, size=(206, 268))
     s_res = {k: v for k, v in sorted(res_i.items(), key=lambda x: x[1])}
-    print(i.filename, list(s_res)[0])
+    s_fn = i.filename.split('/')[2]
+    data['image'] = image_to_base64(
+        './game_image_des/'+s_fn)
+    
     # bd online ocr 出game_image_des的文字存json
     # ['xxx.png':
     # {'ex_image':'monster_card_ex/xxx.png','des':{'properties':'xxx','name':'xxx',''}},]
+    # 24.cccf696941228368cd60ce4819bb8b02.2592000.1564004478.282335-16627478
+    # 低精 5W次 高精度 0.5k次 / 天 
+
+    response = requests.post(
+        'https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic?access_token=24.cccf696941228368cd60ce4819bb8b02.2592000.1564004478.282335-16627478', data=data, verify=False)
+
+    final_msg = load_json()
+    final_msg[i.filename] = {
+        'orignal_img': list(s_res)[0],
+        'with_des_img': './game_image_des/'+s_fn,
+        'ocr_result': response.json()
+    }
+    save_json(final_msg)
+    print(final_msg)
+
