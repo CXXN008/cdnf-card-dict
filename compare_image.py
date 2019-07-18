@@ -76,7 +76,7 @@ def load_image():
 def image_to_base64(image_path):
     img = Image.open(image_path)
     output_buffer = BytesIO()
-    img.save(output_buffer, format='JPEG')
+    img.save(output_buffer, format='PNG')
     byte_data = output_buffer.getvalue()
     base64_str = base64.b64encode(byte_data)
     return base64_str
@@ -108,6 +108,10 @@ data = {
 load_image()
 for i in img:
     res_i = {}
+    final_msg = load_json()
+    if i.filename in final_msg:
+        print(f'skip {i.filename}')
+        continue
     for e in img_ex:
         res_i[e.filename] = classfiy_aHash(i, e, size=(206, 268))
     s_res = {k: v for k, v in sorted(res_i.items(), key=lambda x: x[1])}
@@ -124,7 +128,6 @@ for i in img:
     response = requests.post(
         'https://aip.baidubce.com/rest/2.0/ocr/v1/accurate_basic?access_token=24.cccf696941228368cd60ce4819bb8b02.2592000.1564004478.282335-16627478', data=data, verify=False)
 
-    final_msg = load_json()
     final_msg[i.filename] = {
         'orignal_img': list(s_res)[0],
         'with_des_img': './game_image_des/'+s_fn,
