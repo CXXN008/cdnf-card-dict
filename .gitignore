@@ -1,6 +1,7 @@
 .vscode/
 game_image/
 game_image_des/
+game_image_opt/
 monster_card_ex/
 gh-pages/node_modules/
 gh-pages/.cache/
