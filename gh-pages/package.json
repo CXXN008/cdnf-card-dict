@@ -6,13 +6,13 @@
   "devDependencies": {
     "parcel-bundler": "^1.12.3"
   },
+  "homepage": "https://cccccccccccccccccccccccccccccccccccccc.github.io/cdnf-card-page/",
   "scripts": {
     "dev": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "npx parcel build *.html --no-cache --public-url ./"
   },
   "dependencies": {
     "camera-controls": "^1.12.2",
-    "three": "^0.106.2",
     "tween": "^0.9.0"
   }
 }

@@ -2,12 +2,11 @@
 body {
 	margin: 0;
 	background: rgb(104, 184, 215);
-	/* background: linear-gradient(
+	background: linear-gradient(
 		180deg,
 		rgba(104, 184, 215, 1) 0%,
-		rgba(104, 184, 215, 1) 13%,
 		rgba(255, 255, 255, 1) 100%
-	); */
+	);
 	font-family: Monospace;
 	font-size: 13px;
 	line-height: 24px;

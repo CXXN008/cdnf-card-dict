@@ -1,7 +1,7 @@
 import * as TWEEN from 'Tween'
-import data from './final.json'
-console.log('Dataloading ... OK')
-import test from './js/helper/waitImg'
+// import data from './final.json'
+// console.log('Dataloading ... OK')
+import imgWaiter from './js/helper/waitImg'
 import CameraControls from 'camera-controls'
 
 // import TA from 'text-animate'
@@ -18,13 +18,14 @@ import CameraControls from 'camera-controls'
 // 	seed
 // }
 
+let data
 let objects = []
 let btns = document.getElementsByTagName('button')
 let checks = document.getElementsByClassName('box')
 let searchInput = document.getElementsByTagName('input')[0]
 let currentKeyword = ''
 let currentCheckedGrades = []
-var currentPos = ''
+let currentPos = ''
 
 let shiftDown = false
 
@@ -69,7 +70,7 @@ const posSimplifedMap = {
 	下: '下装',
 	腰: '腰带',
 	鞋: '鞋',
-	全: '',
+	全: '部位',
 	部位: '',
 	武: '武器',
 	称: '称号',
@@ -125,24 +126,23 @@ const colorOpr = {
 	橙: colors[4]
 }
 
-var targets = { cards: [] }
+let targets = { cards: [] }
 
 //setup cameracontrols
 CameraControls.install({ THREE: THREE })
 const width = window.innerWidth
 const height = window.innerHeight
+
 const clock = new THREE.Clock()
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 100)
-camera.position.z = 6000
-
 const renderer = new THREE.CSS3DRenderer()
+camera.position.z = 6000
 renderer.setSize(width, height)
 document.getElementById('container').appendChild(renderer.domElement)
 // renderer.setClearColor( 0xffaa00, 1);
 
 const cameraControls = new CameraControls(camera, renderer.domElement)
-console.log(cameraControls)
 // cameraControls.addEventListener('change', render)
 // cameraControls = new OrbitControls(camera, renderer.domElement)
 cameraControls.minDistance = 10
@@ -158,7 +158,7 @@ cameraControls.dollySpeed = 1
 cameraControls.truckSpeed = 1
 
 // cameraControls.rotateSpeed = 0.2
-cameraControls.dampingFactor = .1
+cameraControls.dampingFactor = 0.1
 
 function initCard() {
 	// cards init
@@ -299,14 +299,15 @@ function setupEvent() {
 	}
 	document.body.onselectstart = () => false
 	document.querySelectorAll('a').forEach((e, i) => {
-		//前14个
+		//skip last one
 		if (i === 14) return
 		e.addEventListener(
 			'click',
 			() => {
-				document.getElementsByClassName(
-					'pos'
-				)[0].children[0].innerText = posSimplifedMap[e.innerText]
+				document.querySelectorAll('a')[14].innerText =
+					posSimplifedMap[e.innerText]
+				togglePosPick()
+				filter()
 			},
 			false
 		)
@@ -531,16 +532,38 @@ function initBackground() {
 	console.log('Background ... OK')
 }
 
+// https://obs-e263.obs.ap-southeast-1.myhuaweicloud.com/final.json
+
 document.addEventListener('DOMContentLoaded', () => {
-	initBackground()
-	initCard()
-	setupEvent()
-	console.log('gpu resources ... OK')
-	transform(targets.cards, 1000)
-	TWEEN.update()
-	console.log('image load ... OK')
-	test(document, () => {
-		transform(targets.cards, 1000)
-		animate()
+	// TODO: use svg or simple ascii animation as loading effect.
+
+	// consider use full site cdn
+	fetch('https://obs-e263.obs.ap-southeast-1.myhuaweicloud.com/final.json', {
+		mode: 'cors'
 	})
+		.then(r => r.json())
+		.then(d => {
+			console.log('data ... OK')
+			data = d
+			initBackground()
+			initCard()
+			setupEvent()
+			console.log('gpu resources ... OK')
+			transform(targets.cards, 1000)
+			TWEEN.update()
+			console.log('image load ... OK')
+			imgWaiter(document, () => {
+				transform(targets.cards, 1000)
+				animate()
+				const s =
+					'-'.repeat(129) +
+					'\n' +
+					'|' +
+					'	沙雕百度ocr api识别，有一定误差，报告数据错误或BUG可以mail给我：cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc	|\n' +
+					'|' +
+					'	立即修复！(如果我还没脱坑的话...)'+' '.repeat(95)+'|\n' +
+					'-'.repeat(129)
+				console.log(s)
+			})
+		})
 })
