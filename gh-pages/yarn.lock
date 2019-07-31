@@ -1228,6 +1228,11 @@ callsites@^2.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-2.0.0.tgz#06eb84f00eea413da86affefacbffb36093b3c50"
   integrity sha1-BuuE8A7qQT2oav/vrL/7Ngk7PFA=
 
+camera-controls@^1.12.2:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/camera-controls/-/camera-controls-1.12.2.tgz#02ae544256f93964e27c6e4b2cc5887cff417d3f"
+  integrity sha512-+qXGiyEwaDIBMT2eDdzaAL0Ihik0yitSdGF5tzGIHwwNFfcYQQTxNacc7EPuMAMgQkF6Opg8m8Uy3IfifaCLMg==
+
 caniuse-api@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/caniuse-api/-/caniuse-api-3.0.0.tgz#5e4d90e2274961d46291997df599e3ed008ee4c0"
@@ -4851,6 +4856,11 @@ terser@^4.1.2:
     commander "^2.20.0"
     source-map "~0.6.1"
     source-map-support "~0.5.12"
+
+three@^0.106.2:
+  version "0.106.2"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.106.2.tgz#6752d304c470e4df230944ecd45325e7bf79e1f8"
+  integrity sha512-4Tlx43uoxnIaZFW2Bzkd1rXsatvVHEWAZJy8LuE+s6Q8c66ogNnhfq1bHiBKPAnXP230LD11H/ScIZc2LZMviA==
 
 through2@^2.0.0, through2@~2.0.3:
   version "2.0.5"

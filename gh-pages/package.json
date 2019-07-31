@@ -11,6 +11,8 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "camera-controls": "^1.12.2",
+    "three": "^0.106.2",
     "tween": "^0.9.0"
   }
 }

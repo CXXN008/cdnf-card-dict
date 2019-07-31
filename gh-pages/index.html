@@ -1,32 +1,78 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>DNF卡片速查</title>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+		/>
+		<link type="text/css" rel="stylesheet" href="main.css" />
+	</head>
 
-<head>
-	<title>卡片辞典威力加强版</title>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<link type="text/css" rel="stylesheet" href="main.css">
-</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/106/three.min.js"></script>
+		<script src="js/vanta.clouds.min.js"></script>
+		<script src="js/helper/CSS3DRenderer.js"></script>
+		<div class="extra-info">
+			<h3></h3>
+			<h3></h3>
+			<h3></h3>
+			<h3></h3>
+			<h3></h3>
+		</div>
+		<div class="search">
+			<input type="text" />
+			<span class="bar"></span>
+		</div>
+		<div id="container"></div>
+		<div class="whole-p hidden">
+			<div class="inner-l">
+				<a>肩</a>
+				<a>上</a>
+				<a>下</a>
+				<a>腰</a>
+				<a>鞋</a>
+				<a>全</a>
+			</div>
 
-<body>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/106/three.js"></script>
-	<script src="js/helper/TrackballControls.js"></script>
-	<script src="js/helper/CSS3DRenderer.js"></script>
+			<div class="inner-r">
+				<a>武</a>
+				<a>称</a>
+				<a>镯</a>
+				<a>链</a>
+				<a>左</a>
+				<a>戒</a>
+				<a>耳</a>
+				<a>右</a>
+			</div>
+		</div>
+		<div class="pos">
+			<a>部位</a>
+		</div>
+		<button class="reset">reset</button>
 
-	<div id="info"><a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> css3 - periodic table. <a
-			href="https://plus.google.com/113862800338869870683/posts/QcFk5HrWran" target="_blank"
-			rel="noopener">info</a>.</div>
-	<div id="container"></div>
-	<div id="menu">
-		<button id="table">TABLE</button>
-		<button id="sphere">SPHERE</button>
-		<button id="helix">HELIX</button>
-		<button id="grid">GRID</button>
-	</div>
+		<div id="menu">
+			<button>冰</button>
+			<button>火</button>
+			<button>暗</button>
+			<button>光</button>
+			<button>全</button>
+			<button>力</button>
+			<button>智</button>
+			<button>体</button>
+			<button>精</button>
+			<button>物</button>
+			<button>魔</button>
+			<button>独</button>
+			<span class="box g-check">白<span class="icon"></span></span>
+			<span class="box g-check">蓝<span class="icon"></span></span>
+			<span class="box g-check">紫<span class="icon"></span></span>
+			<span class="box g-check">粉<span class="icon"></span></span>
+			<span class="box g-check">橙<span class="icon"></span></span>
 
-	<script src="./index.js">
+		</div>
 
-	</script>
-</body>
-
+		<script src="./index.js"></script>
+	</body>
 </html>

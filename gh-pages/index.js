@@ -1,395 +1,546 @@
-import * as TWEEN from 'tween'
+import * as TWEEN from 'Tween'
+import data from './final.json'
+console.log('Dataloading ... OK')
+import test from './js/helper/waitImg'
+import CameraControls from 'camera-controls'
 
-let table = [
-    "H", "Hydrogen", "1.00794", 1, 1,
-    "He", "Helium", "4.002602", 18, 1,
-    "Li", "Lithium", "6.941", 1, 2,
-    "Be", "Beryllium", "9.012182", 2, 2,
-    "B", "Boron", "10.811", 13, 2,
-    "C", "Carbon", "12.0107", 14, 2,
-    "N", "Nitrogen", "14.0067", 15, 2,
-    "O", "Oxygen", "15.9994", 16, 2,
-    "F", "Fluorine", "18.9984032", 17, 2,
-    "Ne", "Neon", "20.1797", 18, 2,
-    "Na", "Sodium", "22.98976...", 1, 3,
-    "Mg", "Magnesium", "24.305", 2, 3,
-    "Al", "Aluminium", "26.9815386", 13, 3,
-    "Si", "Silicon", "28.0855", 14, 3,
-    "P", "Phosphorus", "30.973762", 15, 3,
-    "S", "Sulfur", "32.065", 16, 3,
-    "Cl", "Chlorine", "35.453", 17, 3,
-    "Ar", "Argon", "39.948", 18, 3,
-    "K", "Potassium", "39.948", 1, 4,
-    "Ca", "Calcium", "40.078", 2, 4,
-    "Sc", "Scandium", "44.955912", 3, 4,
-    "Ti", "Titanium", "47.867", 4, 4,
-    "V", "Vanadium", "50.9415", 5, 4,
-    "Cr", "Chromium", "51.9961", 6, 4,
-    "Mn", "Manganese", "54.938045", 7, 4,
-    "Fe", "Iron", "55.845", 8, 4,
-    "Co", "Cobalt", "58.933195", 9, 4,
-    "Ni", "Nickel", "58.6934", 10, 4,
-    "Cu", "Copper", "63.546", 11, 4,
-    "Zn", "Zinc", "65.38", 12, 4,
-    "Ga", "Gallium", "69.723", 13, 4,
-    "Ge", "Germanium", "72.63", 14, 4,
-    "As", "Arsenic", "74.9216", 15, 4,
-    "Se", "Selenium", "78.96", 16, 4,
-    "Br", "Bromine", "79.904", 17, 4,
-    "Kr", "Krypton", "83.798", 18, 4,
-    "Rb", "Rubidium", "85.4678", 1, 5,
-    "Sr", "Strontium", "87.62", 2, 5,
-    "Y", "Yttrium", "88.90585", 3, 5,
-    "Zr", "Zirconium", "91.224", 4, 5,
-    "Nb", "Niobium", "92.90628", 5, 5,
-    "Mo", "Molybdenum", "95.96", 6, 5,
-    "Tc", "Technetium", "(98)", 7, 5,
-    "Ru", "Ruthenium", "101.07", 8, 5,
-    "Rh", "Rhodium", "102.9055", 9, 5,
-    "Pd", "Palladium", "106.42", 10, 5,
-    "Ag", "Silver", "107.8682", 11, 5,
-    "Cd", "Cadmium", "112.411", 12, 5,
-    "In", "Indium", "114.818", 13, 5,
-    "Sn", "Tin", "118.71", 14, 5,
-    "Sb", "Antimony", "121.76", 15, 5,
-    "Te", "Tellurium", "127.6", 16, 5,
-    "I", "Iodine", "126.90447", 17, 5,
-    "Xe", "Xenon", "131.293", 18, 5,
-    "Cs", "Caesium", "132.9054", 1, 6,
-    "Ba", "Barium", "132.9054", 2, 6,
-    "La", "Lanthanum", "138.90547", 4, 9,
-    "Ce", "Cerium", "140.116", 5, 9,
-    "Pr", "Praseodymium", "140.90765", 6, 9,
-    "Nd", "Neodymium", "144.242", 7, 9,
-    "Pm", "Promethium", "(145)", 8, 9,
-    "Sm", "Samarium", "150.36", 9, 9,
-    "Eu", "Europium", "151.964", 10, 9,
-    "Gd", "Gadolinium", "157.25", 11, 9,
-    "Tb", "Terbium", "158.92535", 12, 9,
-    "Dy", "Dysprosium", "162.5", 13, 9,
-    "Ho", "Holmium", "164.93032", 14, 9,
-    "Er", "Erbium", "167.259", 15, 9,
-    "Tm", "Thulium", "168.93421", 16, 9,
-    "Yb", "Ytterbium", "173.054", 17, 9,
-    "Lu", "Lutetium", "174.9668", 18, 9,
-    "Hf", "Hafnium", "178.49", 4, 6,
-    "Ta", "Tantalum", "180.94788", 5, 6,
-    "W", "Tungsten", "183.84", 6, 6,
-    "Re", "Rhenium", "186.207", 7, 6,
-    "Os", "Osmium", "190.23", 8, 6,
-    "Ir", "Iridium", "192.217", 9, 6,
-    "Pt", "Platinum", "195.084", 10, 6,
-    "Au", "Gold", "196.966569", 11, 6,
-    "Hg", "Mercury", "200.59", 12, 6,
-    "Tl", "Thallium", "204.3833", 13, 6,
-    "Pb", "Lead", "207.2", 14, 6,
-    "Bi", "Bismuth", "208.9804", 15, 6,
-    "Po", "Polonium", "(209)", 16, 6,
-    "At", "Astatine", "(210)", 17, 6,
-    "Rn", "Radon", "(222)", 18, 6,
-    "Fr", "Francium", "(223)", 1, 7,
-    "Ra", "Radium", "(226)", 2, 7,
-    "Ac", "Actinium", "(227)", 4, 10,
-    "Th", "Thorium", "232.03806", 5, 10,
-    "Pa", "Protactinium", "231.0588", 6, 10,
-    "U", "Uranium", "238.02891", 7, 10,
-    "Np", "Neptunium", "(237)", 8, 10,
-    "Pu", "Plutonium", "(244)", 9, 10,
-    "Am", "Americium", "(243)", 10, 10,
-    "Cm", "Curium", "(247)", 11, 10,
-    "Bk", "Berkelium", "(247)", 12, 10,
-    "Cf", "Californium", "(251)", 13, 10,
-    "Es", "Einstenium", "(252)", 14, 10,
-    "Fm", "Fermium", "(257)", 15, 10,
-    "Md", "Mendelevium", "(258)", 16, 10,
-    "No", "Nobelium", "(259)", 17, 10,
-    "Lr", "Lawrencium", "(262)", 18, 10,
-    "Rf", "Rutherfordium", "(267)", 4, 7,
-    "Db", "Dubnium", "(268)", 5, 7,
-    "Sg", "Seaborgium", "(271)", 6, 7,
-    "Bh", "Bohrium", "(272)", 7, 7,
-    "Hs", "Hassium", "(270)", 8, 7,
-    "Mt", "Meitnerium", "(276)", 9, 7,
-    "Ds", "Darmstadium", "(281)", 10, 7,
-    "Rg", "Roentgenium", "(280)", 11, 7,
-    "Cn", "Copernicium", "(285)", 12, 7,
-    "Nh", "Nihonium", "(286)", 13, 7,
-    "Fl", "Flerovium", "(289)", 14, 7,
-    "Mc", "Moscovium", "(290)", 15, 7,
-    "Lv", "Livermorium", "(293)", 16, 7,
-    "Ts", "Tennessine", "(294)", 17, 7,
-    "Og", "Oganesson", "(294)", 18, 7
+// import TA from 'text-animate'
+
+// const anim = TA.controller()
+// const seed = Math.random()
+
+// const eTextAni = {
+// 	etchSpeed: 10 + Math.round(Math.random() * 4),
+// 	targetBGColor: 'rgba(0,255,0,0)',
+// 	targetFGColor: 'rgba(0,255,0,1)',
+// 	etchBGColor: 'rgb(0,255,0)',
+// 	etchFGColor: 'rgb(0,255,0)',
+// 	seed
+// }
+
+let objects = []
+let btns = document.getElementsByTagName('button')
+let checks = document.getElementsByClassName('box')
+let searchInput = document.getElementsByTagName('input')[0]
+let currentKeyword = ''
+let currentCheckedGrades = []
+var currentPos = ''
+
+let shiftDown = false
+
+//material colors
+const colors = ['#9E9E9E', '#2196F3', '#9C27B0', '#E91E63', '#FF9800']
+
+const words = [
+	'冰属性强化',
+	'火属性强化',
+	'暗属性强化',
+	'光属性强化',
+	'所有属性强化',
+	'力量',
+	'智力',
+	'体力',
+	'精神',
+	'物理攻击力',
+	'魔法攻击力',
+	'独立攻击力'
 ]
 
-var camera, scene, renderer
-var controls
-
-var objects = []
-var targets = { table: [], sphere: [], helix: [], grid: [] }
-
-init()
-animate()
-
-function init() {
-
-    camera = new THREE.PerspectiveCamera(40, window.innerWidth / window.innerHeight, 1, 10000)
-    camera.position.z = 3000
-
-    scene = new THREE.Scene()
-
-    // table
-
-    for (let i = 0; i < 498; i++) {
-        var img = document.createElement('img')
-        img.className = 'img'
-        img.src = 'http://ww1.sinaimg.cn/large/5e22d844gy1g5dbgub9ilj205q07g0v7.jpg'
-
-        var element = document.createElement('div')
-        element.className = 'element'
-        
-        // element.style.backgroundColor = 'rgba(0,127,127,.5)'
-        // console.log(element.style.backgroundImage);
-        element.appendChild(img)
-        var number = document.createElement('div')
-        number.className = 'number'
-        number.textContent = (i / 5) + 1
-        element.appendChild(number)
-
-        var symbol = document.createElement('div')
-        symbol.className = 'symbol'
-        symbol.textContent = table[i]
-        element.appendChild(symbol)
-
-        var details = document.createElement('div')
-        details.className = 'details'
-        details.innerHTML = table[i + 1] + '<br>' + table[i + 2]
-        element.appendChild(details)
-
-        var object = new THREE.CSS3DObject(element)
-        object.position.x = Math.random() * 4000 - 2000
-        object.position.y = Math.random() * 4000 - 2000
-        object.position.z = Math.random() * 4000 - 2000
-        scene.add(object)
-        
-        objects.push(object)
-
-        //
-
-        var object = new THREE.Object3D()
-        // object.position.x = (table[i + 3] * 226) - 1330
-        object.position.x = (i%30 * 226) - 1920
-        // object.position.y = - (table[i + 4] * 288) + 990
-        object.position.y = - (Math.floor(i/30) * 288) + 1080
-
-        targets.table.push(object)
-
-    }
-
-
-
-    // for (var i = 0; i < table.length; i += 5) {
-    //     var img = document.createElement('img')
-    //     img.className = 'img'
-    //     img.src = 'https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268/sign=639e2d5eb899a9013b355c3025940a58/91529822720e0cf3ab64bfb10a46f21fbf09aaed.jpg'
-
-    //     var element = document.createElement('div')
-    //     element.className = 'element'
-        
-    //     // element.style.backgroundColor = 'rgba(0,127,127,.5)'
-    //     // console.log(element.style.backgroundImage);
-    //     element.appendChild(img)
-    //     var number = document.createElement('div')
-    //     number.className = 'number'
-    //     number.textContent = (i / 5) + 1
-    //     element.appendChild(number)
-
-    //     var symbol = document.createElement('div')
-    //     symbol.className = 'symbol'
-    //     symbol.textContent = table[i]
-    //     element.appendChild(symbol)
-
-    //     var details = document.createElement('div')
-    //     details.className = 'details'
-    //     details.innerHTML = table[i + 1] + '<br>' + table[i + 2]
-    //     element.appendChild(details)
-
-    //     var object = new THREE.CSS3DObject(element)
-    //     object.position.x = Math.random() * 4000 - 2000
-    //     object.position.y = Math.random() * 4000 - 2000
-    //     object.position.z = Math.random() * 4000 - 2000
-    //     scene.add(object)
-        
-    //     objects.push(object)
-
-    //     //
-
-    //     var object = new THREE.Object3D()
-    //     // object.position.x = (table[i + 3] * 226) - 1330
-    //     object.position.x = (table[i + 3] * 226) - 1920
-    //     // object.position.y = - (table[i + 4] * 288) + 990
-    //     object.position.y = - (table[i + 4] * 288) + 1080
-
-    //     targets.table.push(object)
-
-    // }
-
-    // sphere
-
-    var vector = new THREE.Vector3()
-
-    for (var i = 0, l = objects.length; i < l; i++) {
-
-        var phi = Math.acos(- 1 + (2 * i) / l)
-        var theta = Math.sqrt(l * Math.PI) * phi
-
-        var object = new THREE.Object3D()
-
-        object.position.setFromSphericalCoords(800, phi, theta)
-
-        vector.copy(object.position).multiplyScalar(2)
-
-        object.lookAt(vector)
-
-        targets.sphere.push(object)
-
-    }
-
-    // helix
-
-    var vector = new THREE.Vector3()
-
-    for (var i = 0, l = objects.length; i < l; i++) {
-
-        var theta = i * 0.175 + Math.PI
-        var y = - (i * 8) + 450
-
-        var object = new THREE.Object3D()
-
-        object.position.setFromCylindricalCoords(900, theta, y)
-
-        vector.x = object.position.x * 2
-        vector.y = object.position.y
-        vector.z = object.position.z * 2
-
-        object.lookAt(vector)
-
-        targets.helix.push(object)
-
-    }
-
-    // grid
-
-    for (var i = 0; i < objects.length; i++) {
-
-        var object = new THREE.Object3D()
-
-        object.position.x = ((i % 5) * 400) - 800
-        object.position.y = (- (Math.floor(i / 5) % 5) * 400) + 800
-        object.position.z = (Math.floor(i / 25)) * 1000 - 2000
-
-        targets.grid.push(object)
-
-    }
-
-    //
-
-    renderer = new THREE.CSS3DRenderer()
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    document.getElementById('container').appendChild(renderer.domElement)
-
-    //
-
-    controls = new THREE.TrackballControls(camera, renderer.domElement)
-    controls.minDistance = 500
-    controls.maxDistance = 8000
-    controls.addEventListener('change', render)
-
-    var button = document.getElementById('table')
-    button.addEventListener('click', function () {
-
-        transform(targets.table, 500)
-
-    }, false)
-
-    var button = document.getElementById('sphere')
-    button.addEventListener('click', function () {
-
-        transform(targets.sphere, 500)
-
-    }, false)
-
-    var button = document.getElementById('helix')
-    button.addEventListener('click', function () {
-
-        transform(targets.helix, 500)
-
-    }, false)
-
-    var button = document.getElementById('grid')
-    button.addEventListener('click', function () {
-
-        transform(targets.grid, 500)
-
-    }, false)
-
-    transform(targets.table, 1000)
-
-    //
-
-    window.addEventListener('resize', onWindowResize, false)
-
+const posOpr = {
+	49: '头肩',
+	50: '上衣',
+	81: '下装',
+	87: '腰带',
+	65: '鞋',
+	83: '全',
+	51: '武器',
+	52: '称号',
+	69: '手镯',
+	82: '项链',
+	68: '辅助装备',
+	70: '戒指',
+	67: '耳环',
+	86: '魔法石'
+}
+
+const posSimplifedMap = {
+	肩: '头肩',
+	上: '上衣',
+	下: '下装',
+	腰: '腰带',
+	鞋: '鞋',
+	全: '',
+	部位: '',
+	武: '武器',
+	称: '称号',
+	镯: '手镯',
+	链: '项链',
+	左: '辅助装备',
+	戒: '戒指',
+	耳: '耳环',
+	右: '魔法石'
+}
+
+const btnOpr = {
+	冰: words[0],
+	火: words[1],
+	暗: words[2],
+	光: words[3],
+	全: words[4],
+	力: words[5],
+	智: words[6],
+	体: words[7],
+	精: words[8],
+	物: words[9],
+	魔: words[10],
+	独: words[11]
+}
+const keyOpr = {
+	b: words[0],
+	h: words[1],
+	a: words[2],
+	g: words[3],
+	q: words[4],
+	l: words[5],
+	z: words[6],
+	t: words[7],
+	j: words[8],
+	w: words[9],
+	m: words[10],
+	d: words[11]
+}
+
+const colorTem = {
+	white: colors[0],
+	blue: colors[1],
+	purples: colors[2],
+	pink: colors[3],
+	orange: colors[4]
+}
+const colorOpr = {
+	白: colors[0],
+	蓝: colors[1],
+	紫: colors[2],
+	粉: colors[3],
+	橙: colors[4]
+}
+
+var targets = { cards: [] }
+
+//setup cameracontrols
+CameraControls.install({ THREE: THREE })
+const width = window.innerWidth
+const height = window.innerHeight
+const clock = new THREE.Clock()
+const scene = new THREE.Scene()
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 100)
+camera.position.z = 6000
+
+const renderer = new THREE.CSS3DRenderer()
+renderer.setSize(width, height)
+document.getElementById('container').appendChild(renderer.domElement)
+// renderer.setClearColor( 0xffaa00, 1);
+
+const cameraControls = new CameraControls(camera, renderer.domElement)
+console.log(cameraControls)
+// cameraControls.addEventListener('change', render)
+// cameraControls = new OrbitControls(camera, renderer.domElement)
+cameraControls.minDistance = 10
+cameraControls.maxDistance = 6000
+// cameraControls.keyPanSpeed = 100
+// cameraControls.zoomSpeed = 1
+cameraControls.enableDamping = true
+cameraControls.dollyToCursor = true
+cameraControls.verticalDragToForward = true
+cameraControls.azimuthRotateSpeed = 1
+cameraControls.polarRotateSpeed = 1
+cameraControls.dollySpeed = 1
+cameraControls.truckSpeed = 1
+
+// cameraControls.rotateSpeed = 0.2
+cameraControls.dampingFactor = .1
+
+function initCard() {
+	// cards init
+
+	for (const i in data) {
+		var img = document.createElement('img')
+		img.className = 'img'
+		img.src = data[i]['url']
+
+		var element = document.createElement('div')
+		element.className = 'element'
+		element.appendChild(img)
+
+		var title = document.createElement('div')
+		title.className = 'title'
+		title.textContent = data[i]['name']
+		title.style.color = colorTem[data[i]['grade']]
+		element.appendChild(title)
+
+		// var symbol = document.createElement('div')
+		// symbol.className = 'symbol'
+		// symbol.textContent = table[i]
+		// element.appendChild(symbol)
+
+		var details = document.createElement('div')
+		details.className = 'details'
+		details.innerHTML =
+			data[i]['position'] +
+			'<br>' +
+			data[i]['p_type'] +
+			'<br>' +
+			data[i]['min_p'] +
+			' ===> ' +
+			data[i]['max_p']
+		element.appendChild(details)
+
+		element.onmouseenter = e => {
+			document.querySelectorAll('h3').forEach((e, d) => {
+				e.innerText =
+					data[i][
+						[
+							'upgradable',
+							'e_pkc',
+							'hechengqi',
+							'hecheng',
+							'extra'
+						][d]
+					]
+
+				// anim.add(TA.text(e, eTextAni))
+			})
+		}
+
+		element.onmouseleave = e => {
+			document.querySelectorAll('h3').forEach(e => {
+				e.innerText = ''
+			})
+		}
+
+		var object = new THREE.CSS3DObject(element)
+		object.position.x = Math.random() * 10000 - 1582 * 4
+		object.position.y = Math.random() * 10000 - 990 * 4
+		object.position.z = Math.random() * 10000
+		scene.add(object)
+
+		objects.push(object)
+
+		//
+
+		var object = new THREE.Object3D()
+		// object.position.x = (table[i + 3] * 226) - 1330
+		object.position.x = (i % 30) * 226 - 1582 * 2
+		// object.position.y = - (table[i + 4] * 288) + 990
+		object.position.y = -(Math.floor(i / 30) * 288) + 990 * 2
+
+		object.userData = data[i]
+		targets.cards.push(object)
+
+		element.addEventListener(
+			'click',
+			(e, i) => {
+				console.log(e, i)
+			},
+			false
+		)
+	}
+
+	// transform(targets.cards, 1000)
+
+	console.log('Card img url set... OK')
+}
+
+function setupEvent() {
+	for (const i in btns) {
+		if (btns.hasOwnProperty(i)) {
+			const e = btns[i]
+			e.addEventListener('click', () => {
+				if (i == 0) {
+					reset()
+					return
+				}
+				searchInput.value = btnOpr[e.innerText]
+				filter()
+			})
+		}
+	}
+	document.getElementsByClassName('pos')[0].addEventListener(
+		'click',
+		() => {
+			togglePosPick()
+		},
+		false
+	)
+	//fix focus
+	document
+		.getElementById('container')
+		.addEventListener('click', () => document.activeElement.blur(), false)
+	// toggle backgroundColor
+	for (const i in checks) {
+		if (checks.hasOwnProperty(i)) {
+			const e = checks[i]
+			checks[i].style.backgroundColor =
+				checks[i].style.backgroundColor === ''
+					? colorOpr[e.innerText]
+					: ''
+			e.addEventListener(
+				'click',
+				m => {
+					m.target.style.backgroundColor =
+						m.target.style.backgroundColor === ''
+							? colorOpr[m.target.innerText]
+							: ''
+					filter()
+				},
+				false
+			)
+		}
+	}
+	document.body.onselectstart = () => false
+	document.querySelectorAll('a').forEach((e, i) => {
+		//前14个
+		if (i === 14) return
+		e.addEventListener(
+			'click',
+			() => {
+				document.getElementsByClassName(
+					'pos'
+				)[0].children[0].innerText = posSimplifedMap[e.innerText]
+			},
+			false
+		)
+	})
+	//key bind
+	document.onkeydown = e => {
+		//prevent filter when input focused
+		if (document.activeElement === searchInput) {
+			if (e.key === 'Enter') {
+				searchInput.blur()
+			}
+			return
+		}
+		//key event
+		if (e.key in keyOpr && !shiftDown) {
+			searchInput.value = keyOpr[e.key]
+			filter()
+		} else if (
+			e.key === '1' ||
+			e.key === '2' ||
+			e.key === '3' ||
+			e.key === '4' ||
+			e.key === '5'
+		) {
+			checks[e.key - 1].click()
+		} else if (e.key === 'Enter') {
+			searchInput.focus()
+		} else if (e.key === 'Shift') {
+			if (!shiftDown) {
+				shiftDown = true
+				togglePosPick()
+			}
+		} else if (e.keyCode in posOpr && shiftDown) {
+			document.getElementsByClassName('pos')[0].children[0].innerText =
+				posOpr[e.keyCode]
+			filter()
+		} else if (e.code === 'Space') {
+			reset()
+		}
+	}
+	document.onkeyup = e => {
+		//prevent filter when input focused
+		if (document.activeElement === searchInput) return
+		if (e.key === 'Shift') {
+			shiftDown = false
+			togglePosPick()
+		}
+	}
+	searchInput.addEventListener('change', () => {
+		filter()
+	})
+	window.addEventListener('resize', onWindowResize, false)
+	console.log('Event setup ... OK')
+}
+
+function togglePosPick() {
+	let s = document.getElementsByClassName('whole-p')[0]
+	if (s.classList.length > 1) {
+		s.classList.remove('hidden')
+	} else {
+		s.classList.add('hidden')
+	}
+}
+
+function getCurrentPos() {
+	return document.getElementsByClassName('pos')[0].children[0].innerText
+}
+
+function getCurrentSearchWords() {
+	return searchInput.value
+}
+
+function filter() {
+	cameraControls.reset(true)
+
+	currentKeyword = getCurrentSearchWords()
+	currentCheckedGrades = getCheckedColors()
+	let cp = getCurrentPos()
+	currentPos = cp === '全' || cp === '部位' ? '' : cp
+
+	console.log(currentKeyword, currentCheckedGrades, currentPos)
+	var offset = 0
+	for (let i = 0; i < targets.cards.length; i++) {
+		const e = targets.cards[i]
+		const pos =
+			e.userData['position'] === undefined ? '' : e.userData['position']
+		if (
+			e.userData['p_type'].search(currentKeyword) > -1 &&
+			currentCheckedGrades.includes(e.userData['grade']) &&
+			pos.search(currentPos) > -1
+		) {
+			targets.cards[i].position.x = ((i - offset) % 30) * 226 - 1582 * 2
+			targets.cards[i].position.y =
+				-(Math.floor((i - offset) / 30) * 288) + 990 * 2
+			targets.cards[i].position.z = 0
+		} else {
+			targets.cards[i].position.x = 30 * 226 - 1582 * 2 - offset / 5
+			targets.cards[i].position.y =
+				(-data.length / 30) * 288 + 990 * 2 - offset / 10
+			targets.cards[i].position.z = offset / 5
+			offset++
+		}
+	}
+
+	transform(targets.cards, 500)
+}
+
+function reset() {
+	//data
+	currentKeyword = ''
+	//ui
+	searchInput.value = ''
+
+	//data
+	for (const i in checks) {
+		if (checks.hasOwnProperty(i)) {
+			const e = checks[i]
+			checks[i].style.backgroundColor = colorOpr[e.innerText]
+		}
+	}
+	//ui
+	currentCheckedGrades = ['white', 'blue', 'purples', 'pink', 'orange']
+
+	//data
+	currentPos = ''
+	//ui
+	document.getElementsByClassName('pos')[0].children[0].innerText = '部位'
+
+	filter()
+	// for (let i = 0; i < targets.cards.length; i++) {
+	// 	targets.cards[i].position.x = (i % 30) * 226 - 1582 * 2
+	// 	targets.cards[i].position.y = -(Math.floor(i / 30) * 288) + 990 * 2
+	// }
+	// transform(targets.cards, 500)
 }
 
 function transform(targets, duration) {
+	TWEEN.removeAll()
 
-    TWEEN.removeAll()
+	for (var i = 0; i < objects.length; i++) {
+		var object = objects[i]
+		var target = targets[i]
 
-    for (var i = 0; i < objects.length; i++) {
+		new TWEEN.Tween(object.position)
+			.to(
+				{
+					x: target.position.x,
+					y: target.position.y,
+					z: target.position.z
+				},
+				Math.random() * duration + duration
+			)
+			.easing(TWEEN.Easing.Exponential.InOut)
+			.start()
 
-        var object = objects[i]
-        var target = targets[i]
+		new TWEEN.Tween(object.rotation)
+			.to(
+				{
+					x: target.rotation.x,
+					y: target.rotation.y,
+					z: target.rotation.z
+				},
+				Math.random() * duration + duration
+			)
+			.easing(TWEEN.Easing.Exponential.InOut)
+			.start()
+	}
 
-        new TWEEN.Tween(object.position)
-            .to({ x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration)
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start()
-
-        new TWEEN.Tween(object.rotation)
-            .to({ x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration)
-            .easing(TWEEN.Easing.Exponential.InOut)
-            .start()
-
-    }
-
-    new TWEEN.Tween(this)
-        .to({}, duration * 2)
-        .onUpdate(render)
-        .start()
-
+	new TWEEN.Tween(this)
+		.to({}, duration * 2)
+		.onUpdate(render)
+		.start()
 }
+
 function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight
+	camera.updateProjectionMatrix()
 
-    camera.aspect = window.innerWidth / window.innerHeight
-    camera.updateProjectionMatrix()
+	renderer.setSize(window.innerWidth, window.innerHeight)
 
-    renderer.setSize(window.innerWidth, window.innerHeight)
+	render()
+}
 
-    render()
+function getCheckedColors() {
+	let r = []
+	for (const i in checks) {
+		if (checks.hasOwnProperty(i)) {
+			const e = checks[i]
+			if (e.style.backgroundColor !== '') {
+				r.push(Object.keys(colorTem)[i])
+			}
+		}
+	}
+	return r
+}
 
+function getCurrentKeywords() {
+	return currentKeyword
 }
 
 function animate() {
+	const delta = clock.getDelta()
+	const elapsed = clock.getElapsedTime()
+	const updated = cameraControls.update(delta)
 
-    requestAnimationFrame(animate)
+	requestAnimationFrame(animate)
+	TWEEN.update()
 
-    TWEEN.update()
-
-    controls.update()
-
+	if (updated) {
+		renderer.render(scene, camera)
+		console.log('rendered')
+	}
+	// cameraControls.update()
 }
 
 function render() {
-
-    renderer.render(scene, camera)
-
+	renderer.render(scene, camera)
 }
+
+function initBackground() {
+	VANTA.CLOUDS({ el: '#container' })
+	console.log('Background ... OK')
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+	initBackground()
+	initCard()
+	setupEvent()
+	console.log('gpu resources ... OK')
+	transform(targets.cards, 1000)
+	TWEEN.update()
+	console.log('image load ... OK')
+	test(document, () => {
+		transform(targets.cards, 1000)
+		animate()
+	})
+})
