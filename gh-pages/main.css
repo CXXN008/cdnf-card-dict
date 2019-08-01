@@ -37,11 +37,13 @@ h3 {
 	text-shadow: 0 0 2px rgba(0, 0, 0, 1);
 }
 
+
+
 .search {
 	top: 5%;
 	position: absolute;
 	width: 100%;
-	z-index: 3;
+	z-index: 2;
 	border: none;
 	/* border:1px solid #fff ; */
 }
@@ -56,9 +58,9 @@ input {
 	margin: auto;
 	position: absolute;
 	font-size: 30px;
-	color: #000000;
-	cursor: pointer;
-	text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+	pointer-events: none;
+	color: #0fb48b;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 	background: transparent;
 	padding: 0 0 10px 0;
 	width: 200px;
@@ -81,6 +83,7 @@ input:valid ~ label {
 	font-size: 14px;
 	color: rgb(0, 255, 0);
 }
+
 
 /* BOTTOM BARS ================================= */
 
