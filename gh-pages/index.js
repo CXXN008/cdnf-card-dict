@@ -191,13 +191,13 @@ function initCard() {
 			(process.env.NODE_ENV === 'development'
 				? data[i]['file'] + '<br>'
 				: '') +
-				  data[i]['position'] +
-				  '<br>' +
-				  data[i]['p_type'] +
-				  '<br>' +
-				  (data[i]['min_p'] === undefined ? '' : data[i]['min_p']) +
-				  (data[i]['min_p'] === undefined ? '<br>' : ' ===> ') +
-				  (data[i]['max_p'] === undefined ? '' : data[i]['max_p'])
+			data[i]['position'] +
+			'<br>' +
+			data[i]['p_type'] +
+			'<br>' +
+			(data[i]['min_p'] === undefined ? '' : data[i]['min_p']) +
+			(data[i]['min_p'] === undefined ? '<br>' : ' ===> ') +
+			(data[i]['max_p'] === undefined ? '' : data[i]['max_p'])
 		element.appendChild(details)
 
 		element.onmouseenter = e => {
@@ -252,14 +252,67 @@ function initCard() {
 	}
 	console.log('url set... OK')
 }
+function toggleFullscreen(event) {
+	let element = document.body
+	let svgPath = document.getElementsByClassName('fullscreen')[0].children[0]
+		.children[0]
+
+	if (event instanceof HTMLElement) {
+		element = event
+	}
+
+	let isFullscreen =
+		document.webkitIsFullScreen || document.mozFullScreen || false
+
+	element.requestFullScreen =
+		element.requestFullScreen ||
+		element.webkitRequestFullScreen ||
+		element.mozRequestFullScreen ||
+		function() {
+			return false
+		}
+	document.cancelFullScreen =
+		document.cancelFullScreen ||
+		document.webkitCancelFullScreen ||
+		document.mozCancelFullScreen ||
+		function() {
+			return false
+		}
+	if (isFullscreen) {
+		document.cancelFullScreen()
+		svgPath.setAttribute(
+			'd',
+			'M4.5 11H3v4h4v-1.5H4.5V11zM3 7h1.5V4.5H7V3H3v4zm10.5 6.5H11V15h4v-4h-1.5v2.5zM11 3v1.5h2.5V7H15V3h-4z'
+		)
+	} else {
+		element.requestFullScreen()
+		document.body.requestFullscreen()
+		svgPath.setAttribute(
+			'd',
+			'M3 12.5h2.5V15H7v-4H3v1.5zm2.5-7H3V7h4V3H5.5v2.5zM11 15h1.5v-2.5H15V11h-4v4zm1.5-9.5V3H11v4h4V5.5h-2.5z'
+		)
+	}
+}
 
 function setupEvent() {
 	for (const i in btns) {
 		if (btns.hasOwnProperty(i)) {
 			const e = btns[i]
+
 			e.addEventListener('click', () => {
-				if (i == 0) {
+				document.activeElement.blur()
+				if (e.innerText === 'RESET') {
 					reset()
+					return
+				}
+
+				if (i == 0) {
+					toggleFullscreen()
+					return
+				}
+
+				if (i == 1) {
+					console.log('keymap')
 					return
 				}
 				searchInput.value = btnOpr[e.innerText]
@@ -283,6 +336,7 @@ function setupEvent() {
 			e.addEventListener(
 				'click',
 				m => {
+					document.activeElement.blur()
 					m.target.style.backgroundColor =
 						m.target.style.backgroundColor === ''
 							? colorOpr[m.target.innerText]
@@ -298,6 +352,7 @@ function setupEvent() {
 		e.addEventListener(
 			'click',
 			() => {
+				document.activeElement.blur()
 				if (i !== 14) {
 					document.querySelectorAll('a')[14].innerText =
 						posSimplifedMap[e.innerText]

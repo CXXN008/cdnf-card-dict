@@ -21,18 +21,19 @@ canvas {
 }
 
 .extra-info {
+	margin-left: 10%;
+	margin-right: 10%;
 	position: absolute;
 	display: flex;
 	z-index: 5;
-	margin: 0;
-	width: 100%;
+	width: 80%;
 	background: transparent;
 }
 
 h3 {
 	margin: 5px 10px;
 	width: 20%;
-	color: rgb(102, 79, 44);
+	color: rgb(255, 255, 255);
 	text-shadow: 0 0 2px rgba(0, 0, 0, 1);
 }
 
@@ -268,7 +269,29 @@ a:active{
 	right: 3%;
 	position: absolute;
 	z-index: 9;
-	width: 100px;
+	width: 82px;
+}
+
+.keymap {
+	top: 20px;
+	right: 3%;
+	text-shadow: 0 0 10px black;
+	color: white(228, 137, 0);
+	font-weight: 888;
+	position: absolute;
+	z-index: 9;
+	width: 82px;
+}
+
+
+.fullscreen {
+	top: 20px;
+	left: 3%;
+	color: white(228, 137, 0);
+	font-weight: 888;
+	position: absolute;
+	z-index: 9;
+	width: 82px;
 }
 
 .pos {
