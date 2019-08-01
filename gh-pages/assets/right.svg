@@ -1,0 +1,12 @@
+<svg width="60px" height="70px" xmlns="http://www.w3.org/2000/svg">
+    <g transform="translate(10, 10)">
+    <ellipse cx="17.7" cy="26.0" rx="16.7" ry="25.0" fill="#d8d8d8" stroke="#939393" stroke-width="2"/>
+    <rect x="2.2" y="16.7" width="31.0" height="2" fill="#939393"/>
+    <rect x="17.7" y="1.0" width="2" height="16.7" fill="#939393"/>
+    <clipPath id="clickMB">
+        <ellipse cx="17.7" cy="26.0" rx="15.7" ry="24.0" fill="#000000"/>
+    </clipPath>
+    <rect x="19.7" width="17.7" height="16.7" fill="#ed6a6a" clip-path="url(#clickMB)"/>
+    <ellipse cx="18.7" cy="8.2" rx="2.5" ry="5.0" fill="#939393" stroke="#939393" stroke-width="2"/>
+    </g>
+</svg>

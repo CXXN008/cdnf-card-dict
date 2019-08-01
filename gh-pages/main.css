@@ -253,7 +253,7 @@ a:hover {
 	cursor: pointer;
 }
 
-a:active{
+a:active {
 	background-color: rgba(0, 255, 0, 1);
 }
 
@@ -279,11 +279,89 @@ a:active{
 	color: white(228, 137, 0);
 	font-weight: 888;
 	position: absolute;
-	z-index: 9;
+	z-index: 10;
 	width: 82px;
 }
 
+.keymap:hover + .tooltip {
+	max-height: 100%;
+	transition: max-height 0.15s ease-in;
+}
 
+.keymap:hover ~ .tooltip-left {
+	height: 85%;
+	transition: height 0.15s ease-in;
+}
+
+
+
+
+.tooltip-left {
+	padding: 0 15px 0 15px;
+	bottom:  8%;
+	left: 1%;
+	color: white(228, 137, 0);
+	font-weight: 888;
+	position: absolute;
+	z-index: 9;
+	background: #00000050;
+	width: 200px;
+	display: block;
+	height: 0;
+	word-wrap: break-word;
+	transition: height 0.15s ease-out;
+	overflow: hidden;
+}
+
+.tooltip-left > div {
+	display: flex;
+	height: 6.5%;
+}
+
+.tooltip-left > div > img {
+	align-self: center;
+	padding-left: 5px;
+}
+
+.tooltip-left > div > span {
+	line-height: 58px;
+	width: 100%;
+	color: white;
+	font-size: 15px;
+}
+
+.tooltip {
+	padding: 0 15px 0 15px;
+	top: 8%;
+	right: 1%;
+	color: white(228, 137, 0);
+	font-weight: 888;
+	position: absolute;
+	z-index: 9;
+	background: #00000050;
+	width: 200px;
+	display: block;
+	word-wrap: break-word;
+	max-height: 0;
+	transition: max-height 0.15s ease-out;
+	overflow: hidden;
+}
+.tooltip > div {
+	display: flex;
+	height: 4.5%;
+}
+
+.tooltip > div > img {
+	align-self: center;
+	padding-left: 5px;
+}
+
+.tooltip > div > span {
+	line-height: 38px;
+	width: 100%;
+	color: white;
+	font-size: 15px;
+}
 .fullscreen {
 	top: 20px;
 	left: 3%;
