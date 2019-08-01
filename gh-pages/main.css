@@ -41,7 +41,7 @@ h3 {
 	top: 5%;
 	position: absolute;
 	width: 100%;
-	z-index: 1;
+	z-index: 3;
 	border: none;
 	/* border:1px solid #fff ; */
 }
