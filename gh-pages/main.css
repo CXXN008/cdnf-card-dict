@@ -4,8 +4,9 @@ body {
 	background: rgb(104, 184, 215);
 	background: linear-gradient(
 		180deg,
-		rgba(104, 184, 215, 1) 0%,
-		rgba(255, 255, 255, 1) 100%
+		rgba(104, 184, 215, 0.5) 0%,
+		rgba(255, 255, 255, 0.5) 20%,
+		rgba(233, 233, 233, 0.5) 100%
 	);
 	font-family: Monospace;
 	font-size: 13px;
@@ -22,7 +23,7 @@ canvas {
 .extra-info {
 	position: absolute;
 	display: flex;
-	z-index: 2;
+	z-index: 5;
 	margin: 0;
 	width: 100%;
 	background: transparent;
@@ -54,7 +55,8 @@ input {
 	margin: auto;
 	position: absolute;
 	font-size: 30px;
-	color: #68eda1;
+	color: #000000;
+	cursor: pointer;
 	text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 	background: transparent;
 	padding: 0 0 10px 0;
@@ -116,7 +118,7 @@ input:focus ~ .bar:after {
 
 #menu {
 	position: absolute;
-	z-index: 5;
+	z-index: 3;
 	bottom: 20px;
 	width: 80%;
 	left: 10%;
@@ -285,4 +287,36 @@ a:hover {
 
 .hidden {
 	visibility: hidden;
+}
+
+
+.text-focus-in {
+	animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+}
+
+@keyframes text-focus-in {
+	0% {
+		filter: blur(15px);
+		opacity: 0;
+	}
+	100% {
+		filter: blur(0px);
+		opacity: 1;
+	}
+}
+
+.scale-in-center {
+	animation: scale-in-center 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes scale-in-center {
+	0% {
+		background: transparent;
+	}
+	50% {
+		background: #00ff00;
+	}
+	100% {
+		background: transparent;
+	}
 }

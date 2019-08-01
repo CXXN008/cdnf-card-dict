@@ -3,6 +3,7 @@ import * as TWEEN from 'Tween'
 // console.log('Dataloading ... OK')
 import imgWaiter from './js/helper/waitImg'
 import CameraControls from 'camera-controls'
+// import JSZip from 'jszip'
 
 // import TA from 'text-animate'
 
@@ -26,6 +27,7 @@ let searchInput = document.getElementsByTagName('input')[0]
 let currentKeyword = ''
 let currentCheckedGrades = []
 let currentPos = ''
+let section = document.querySelector('section')
 
 let shiftDown = false
 
@@ -101,7 +103,7 @@ const keyOpr = {
 	h: words[1],
 	a: words[2],
 	g: words[3],
-	q: words[4],
+	s: words[4],
 	l: words[5],
 	z: words[6],
 	t: words[7],
@@ -151,10 +153,10 @@ cameraControls.maxDistance = 6000
 // cameraControls.zoomSpeed = 1
 cameraControls.enableDamping = true
 cameraControls.dollyToCursor = true
-cameraControls.verticalDragToForward = true
+// cameraControls.verticalDragToForward = true
 cameraControls.azimuthRotateSpeed = 1
 cameraControls.polarRotateSpeed = 1
-cameraControls.dollySpeed = 1
+cameraControls.dollySpeed = 2
 cameraControls.truckSpeed = 1
 
 // cameraControls.rotateSpeed = 0.2
@@ -245,10 +247,7 @@ function initCard() {
 			false
 		)
 	}
-
-	// transform(targets.cards, 1000)
-
-	console.log('Card img url set... OK')
+	console.log('url set... OK')
 }
 
 function setupEvent() {
@@ -265,13 +264,7 @@ function setupEvent() {
 			})
 		}
 	}
-	document.getElementsByClassName('pos')[0].addEventListener(
-		'click',
-		() => {
-			togglePosPick()
-		},
-		false
-	)
+
 	//fix focus
 	document
 		.getElementById('container')
@@ -299,15 +292,20 @@ function setupEvent() {
 	}
 	document.body.onselectstart = () => false
 	document.querySelectorAll('a').forEach((e, i) => {
-		//skip last one
-		if (i === 14) return
 		e.addEventListener(
 			'click',
 			() => {
-				document.querySelectorAll('a')[14].innerText =
-					posSimplifedMap[e.innerText]
-				togglePosPick()
-				filter()
+				if (i !== 14) {
+					document.querySelectorAll('a')[14].innerText =
+						posSimplifedMap[e.innerText]
+					document
+						.querySelectorAll('a')
+						[i].classList.add('scale-in-center')
+					filter()
+					s.classList.remove('hidden')
+				} else {
+					togglePosPick()
+				}
 			},
 			false
 		)
@@ -338,11 +336,16 @@ function setupEvent() {
 		} else if (e.key === 'Shift') {
 			if (!shiftDown) {
 				shiftDown = true
-				togglePosPick()
+				document
+					.getElementsByClassName('whole-p')[0]
+					.classList.remove('hidden')
 			}
 		} else if (e.keyCode in posOpr && shiftDown) {
 			document.getElementsByClassName('pos')[0].children[0].innerText =
 				posOpr[e.keyCode]
+
+			document.querySelectorAll('a')[14].classList.add('scale-in-center')
+
 			filter()
 		} else if (e.code === 'Space') {
 			reset()
@@ -353,7 +356,9 @@ function setupEvent() {
 		if (document.activeElement === searchInput) return
 		if (e.key === 'Shift') {
 			shiftDown = false
-			togglePosPick()
+			document
+				.getElementsByClassName('whole-p')[0]
+				.classList.add('hidden')
 		}
 	}
 	searchInput.addEventListener('change', () => {
@@ -483,10 +488,11 @@ function transform(targets, duration) {
 }
 
 function onWindowResize() {
-	camera.aspect = window.innerWidth / window.innerHeight
-	camera.updateProjectionMatrix()
-
+	// camera.aspect = window.innerWidth / window.innerHeight
 	renderer.setSize(window.innerWidth, window.innerHeight)
+	// console.log(VANTA);
+	VANTA.current.resize()
+	camera.updateProjectionMatrix()
 
 	render()
 }
@@ -517,8 +523,8 @@ function animate() {
 	TWEEN.update()
 
 	if (updated) {
-		renderer.render(scene, camera)
-		console.log('rendered')
+		render()
+		// console.log('rendered')
 	}
 	// cameraControls.update()
 }
@@ -529,41 +535,77 @@ function render() {
 
 function initBackground() {
 	VANTA.CLOUDS({ el: '#container' })
-	console.log('Background ... OK')
+	console.log('background set ... OK')
 }
 
 // https://obs-e263.obs.ap-southeast-1.myhuaweicloud.com/final.json
 
 document.addEventListener('DOMContentLoaded', () => {
+	initBackground()
+
 	// TODO: use svg or simple ascii animation as loading effect.
 
-	// consider use full site cdn
-	fetch('https://obs-e263.obs.ap-southeast-1.myhuaweicloud.com/final.json', {
-		mode: 'cors'
-	})
-		.then(r => r.json())
-		.then(d => {
-			console.log('data ... OK')
+	getJson().then(d => {
+		if (process.env.NODE_ENV === 'development') {
+			data = require('./final.json')
+		} else {
 			data = d
-			initBackground()
-			initCard()
-			setupEvent()
-			console.log('gpu resources ... OK')
-			transform(targets.cards, 1000)
-			TWEEN.update()
-			console.log('image load ... OK')
-			imgWaiter(document, () => {
-				transform(targets.cards, 1000)
-				animate()
-				const s =
-					'-'.repeat(129) +
-					'\n' +
-					'|' +
-					'	沙雕百度ocr api识别，有一定误差，报告数据错误或BUG可以mail给我：cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc	|\n' +
-					'|' +
-					'	立即修复！(如果我还没脱坑的话...)'+' '.repeat(95)+'|\n' +
-					'-'.repeat(129)
-				console.log(s)
+		}
+		console.log('data set ... OK')
+		section.classList.remove('hidden')
+		section.classList.add('text-focus-in')
+		document.querySelectorAll('a').forEach(a => {
+			a.addEventListener('animationend', e => {
+				e.target.classList.remove('scale-in-center')
 			})
 		})
+
+		initCard()
+		setupEvent()
+
+		// focus in effect
+
+		render()
+		console.log('render object ... OK')
+		imgWaiter(document, () => {
+			console.log('image load ... OK')
+			transform(targets.cards, 1000)
+			animate()
+		})
+	})
 })
+
+function getJson() {
+	return fetch(
+		'https://obs-e263.obs.ap-southeast-1.myhuaweicloud.com/final.json'
+	)
+		.then(r => r.json())
+		.catch(error => {
+			document.querySelector('input').value = '数据获取粗错'
+			console.error('Error:', error)
+		})
+}
+
+//  function getZippedJson() {
+// 	return fetch('https://obs-e263.obs.myhwclouds.com/final.zip')
+// 		.then(function(response) {
+// 			if (response.status === 200 || response.status === 0) {
+// 				return Promise.resolve(response.blob())
+// 			} else {
+// 				return Promise.reject(new Error(response.statusText))
+// 			}
+// 		})
+// 		.then(JSZip.loadAsync)
+// 		.then(function(zip) {
+// 			console.log('unzip file... OK');
+// 			return zip.file('final.json').async('string')
+// 		})
+// 		.then(
+// 			function success(text) {
+// 				return eval(text)
+// 			},
+// 			function error(e) {
+// 				console.log(e)
+// 			}
+// 		)
+// }
