@@ -188,13 +188,16 @@ function initCard() {
 		var details = document.createElement('div')
 		details.className = 'details'
 		details.innerHTML =
-			data[i]['position'] +
-			'<br>' +
-			data[i]['p_type'] +
-			'<br>' +
-			data[i]['min_p'] +
-			' ===> ' +
-			data[i]['max_p']
+			(process.env.NODE_ENV === 'development'
+				? data[i]['file'] + '<br>'
+				: '') +
+				  data[i]['position'] +
+				  '<br>' +
+				  data[i]['p_type'] +
+				  '<br>' +
+				  (data[i]['min_p'] === undefined ? '' : data[i]['min_p']) +
+				  (data[i]['min_p'] === undefined ? '<br>' : ' ===> ') +
+				  (data[i]['max_p'] === undefined ? '' : data[i]['max_p'])
 		element.appendChild(details)
 
 		element.onmouseenter = e => {

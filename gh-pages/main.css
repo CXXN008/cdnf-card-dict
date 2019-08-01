@@ -32,8 +32,8 @@ canvas {
 h3 {
 	margin: 5px 10px;
 	width: 20%;
-	color: rgb(180, 163, 137);
-	text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+	color: rgb(102, 79, 44);
+	text-shadow: 0 0 2px rgba(0, 0, 0, 1);
 }
 
 .search {
@@ -154,9 +154,8 @@ input:focus ~ .bar:after {
 	top: 15px;
 	left: 10%;
 	right: 10%;
-	font-weight: 555;
-	font-size: 14px;
-	text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+	font-weight: 444;
+	font-size: 13px;
 }
 
 .element .symbol {
@@ -249,7 +248,12 @@ a {
 	border: #00ff00 solid 1px;
 }
 a:hover {
+	background-color: rgba(76, 175, 80, 0.5);
 	cursor: pointer;
+}
+
+a:active{
+	background-color: rgba(0, 255, 0, 1);
 }
 
 .inner-l {
@@ -258,15 +262,16 @@ a:hover {
 
 .reset {
 	bottom: 20px;
+	text-shadow: 0 0 10px black;
+	color: white(228, 137, 0);
+	font-weight: 888;
 	right: 3%;
-	color: black;
 	position: absolute;
 	z-index: 9;
 	width: 100px;
 }
 
 .pos {
-	color: black;
 	bottom: 20px;
 	left: 3%;
 	position: absolute;
@@ -275,7 +280,10 @@ a:hover {
 }
 
 .pos > a {
+	color: black;
 	height: 100%;
+	text-shadow: 0 0 10px white;
+	font-weight: 888;
 	width: 80%;
 	left: 0;
 	text-align: center;
@@ -288,7 +296,6 @@ a:hover {
 .hidden {
 	visibility: hidden;
 }
-
 
 .text-focus-in {
 	animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
