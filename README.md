@@ -1,6 +1,5 @@
 # cdnf-card-dict
 ## 文件说明
-### reset_window.py
 
 ### 一点微小的工作.py
 
