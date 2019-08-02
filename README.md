@@ -32,5 +32,5 @@ cd gh-pages
 npm install
 npm run dev
 ```
-build需要按需自行修改build.py
+build需要按需自行修改gh-pages/build.py
 
