@@ -38,3 +38,5 @@ npm run dev
 
 build需要按需自行修改gh-pages/build.py
 
+## LICENSE
+### MIT
