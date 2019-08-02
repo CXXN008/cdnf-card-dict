@@ -36,6 +36,8 @@ npm install
 npm run dev
 ```
 
+可以使用parcel进行调试
+
 build需要按需自行修改gh-pages/build.py
 
 ## LICENSE
