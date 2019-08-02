@@ -3,6 +3,8 @@
 
 游戏操作需要安装pywin32
 
+`pip install pywin32`
+
 ### 一点微小的工作.py
 
 图床批量传图
