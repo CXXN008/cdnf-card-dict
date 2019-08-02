@@ -1,6 +1,8 @@
 # cdnf-card-dict
 ## 文件说明
 
+游戏操作需要安装pywin32
+
 ### 一点微小的工作.py
 
 图床批量传图
@@ -31,5 +33,6 @@ cd gh-pages
 npm install
 npm run dev
 ```
+
 build需要按需自行修改gh-pages/build.py
 
