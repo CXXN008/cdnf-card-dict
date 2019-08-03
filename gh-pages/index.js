@@ -360,7 +360,11 @@ function setupEvent() {
 						.querySelectorAll('a')
 						[i].classList.add('scale-in-center')
 					filter()
-					s.classList.remove('hidden')
+					try {
+						s.classList.remove('hidden')
+					} catch (e) {
+						//do nothing
+					}
 				} else {
 					togglePosPick()
 				}

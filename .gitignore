@@ -7,6 +7,5 @@ gh-pages/node_modules/
 gh-pages/.cache/
 gh-pages/dist/
 yarn-error.log
-final.json
 final.zip
 diff.txt
