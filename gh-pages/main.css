@@ -37,8 +37,6 @@ h3 {
 	text-shadow: 0 0 2px rgba(0, 0, 0, 1);
 }
 
-
-
 .search {
 	top: 5%;
 	position: absolute;
@@ -83,7 +81,6 @@ input:valid ~ label {
 	font-size: 14px;
 	color: rgb(0, 255, 0);
 }
-
 
 /* BOTTOM BARS ================================= */
 
@@ -292,16 +289,13 @@ a:active {
 }
 
 .keymap:hover ~ .tooltip-left {
-	height: 85%;
+	max-height: 100%;
 	transition: height 0.15s ease-in;
 }
 
-
-
-
 .tooltip-left {
 	padding: 0 15px 0 15px;
-	bottom:  8%;
+	bottom: 8%;
 	left: 1%;
 	color: white(228, 137, 0);
 	font-weight: 888;
@@ -310,9 +304,9 @@ a:active {
 	background: #00000050;
 	width: 200px;
 	display: block;
-	height: 0;
+	max-height: 0;
 	word-wrap: break-word;
-	transition: height 0.15s ease-out;
+	transition: max-height 0.15s ease-out;
 	overflow: hidden;
 }
 
@@ -429,5 +423,39 @@ a:active {
 	}
 	100% {
 		background: transparent;
+	}
+}
+
+#toast {
+	position: fixed;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%);
+	background-color: #000;
+	color: #fff;
+	padding: 16px;
+	border-radius: 4px;
+	text-align: center;
+	z-index: 2;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+	visibility: hidden;
+	opacity: 0;
+}
+
+#toast.show {
+	visibility: visible;
+	animation: fadeInOut 2s;
+}
+
+@keyframes fadeInOut {
+	5%,
+	95% {
+		opacity: 1;
+		top: 50px;
+	}
+	15%,
+	85% {
+		opacity: 1;
+		top: 30px;
 	}
 }

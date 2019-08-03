@@ -21,6 +21,7 @@ import CameraControls from 'camera-controls'
 
 let data
 let objects = []
+let tTime = []
 let btns = document.getElementsByTagName('button')
 let checks = document.getElementsByClassName('box')
 let searchInput = document.getElementsByTagName('input')[0]
@@ -28,6 +29,7 @@ let currentKeyword = ''
 let currentCheckedGrades = []
 let currentPos = ''
 let section = document.querySelector('section')
+let toast = document.getElementById('toast')
 
 let shiftDown = false
 
@@ -157,7 +159,7 @@ cameraControls.dollyToCursor = true
 cameraControls.azimuthRotateSpeed = 1
 cameraControls.polarRotateSpeed = 1
 cameraControls.dollySpeed = 2
-cameraControls.truckSpeed = 1
+cameraControls.truckSpeed = 2
 
 // cameraControls.rotateSpeed = 0.2
 cameraControls.dampingFactor = 0.1
@@ -295,6 +297,11 @@ function toggleFullscreen(event) {
 }
 
 function setupEvent() {
+
+	toast.addEventListener("animationend", (a)=>{
+		toast.classList.remove('show')
+	}, false);
+
 	for (const i in btns) {
 		if (btns.hasOwnProperty(i)) {
 			const e = btns[i]
@@ -411,6 +418,17 @@ function setupEvent() {
 			filter()
 		} else if (e.code === 'Space') {
 			reset()
+		} else if (e.key === '+') {
+			cameraControls.dollySpeed +=
+				cameraControls.dollySpeed === 5 ? 0 : 0.5
+			cameraControls.truckSpeed +=
+				cameraControls.truckSpeed === 5 ? 0 : 0.5
+
+			showtoast()
+		} else if (e.key === '-') {
+			cameraControls.dollySpeed -=
+				cameraControls.dollySpeed === 0.5 ? 0 : 0.5
+			cameraControls.truckSpeed -= showtoast()
 		}
 	}
 	document.onkeyup = e => {
@@ -428,6 +446,12 @@ function setupEvent() {
 	})
 	window.addEventListener('resize', onWindowResize, false)
 	console.log('Event setup ... OK')
+}
+
+function showtoast() {
+	cameraControls.truckSpeed === 0.5 ? 0 : 0.5
+	toast.innerText = '当前缩放、平移速度:' + cameraControls.dollySpeed
+	toast.classList.add('show')
 }
 
 function togglePosPick() {
