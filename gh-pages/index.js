@@ -297,10 +297,13 @@ function toggleFullscreen(event) {
 }
 
 function setupEvent() {
-
-	toast.addEventListener("animationend", (a)=>{
-		toast.classList.remove('show')
-	}, false);
+	toast.addEventListener(
+		'animationend',
+		a => {
+			toast.classList.remove('show')
+		},
+		false
+	)
 
 	for (const i in btns) {
 		if (btns.hasOwnProperty(i)) {
@@ -420,15 +423,16 @@ function setupEvent() {
 			reset()
 		} else if (e.key === '+') {
 			cameraControls.dollySpeed +=
-				cameraControls.dollySpeed === 5 ? 0 : 0.5
+				cameraControls.dollySpeed === 5 ? 0 : .5
 			cameraControls.truckSpeed +=
-				cameraControls.truckSpeed === 5 ? 0 : 0.5
-
+				cameraControls.truckSpeed === 5 ? 0 : .5
 			showtoast()
 		} else if (e.key === '-') {
 			cameraControls.dollySpeed -=
-				cameraControls.dollySpeed === 0.5 ? 0 : 0.5
-			cameraControls.truckSpeed -= showtoast()
+				cameraControls.dollySpeed === .5 ? 0 : .5
+			cameraControls.truckSpeed -=
+				cameraControls.truckSpeed === .5 ? 0 : .5
+			showtoast()
 		}
 	}
 	document.onkeyup = e => {

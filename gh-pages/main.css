@@ -312,7 +312,7 @@ a:active {
 
 .tooltip-left > div {
 	display: flex;
-	height: 6%;
+	height: 4.5%;
 }
 
 .tooltip-left > div > img {
@@ -321,7 +321,7 @@ a:active {
 }
 
 .tooltip-left > div > span {
-	line-height: 58px;
+	line-height: 38px;
 	width: 100%;
 	color: white;
 	font-size: 15px;
