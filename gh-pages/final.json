@@ -3527,7 +3527,7 @@
         "game_shot": "298",
         "p_type": "独立攻击力",
         "extra": "无法进入",
-        "name": "",
+        "name": "巨龙石像",
         "upgradable": "无法升级",
         "position": "项链,手镯,鞋",
         "min_p": "44",
@@ -3591,7 +3591,7 @@
         "game_shot": "300",
         "p_type": "物理攻击力",
         "extra": "愚蠢的下等生物准备接受我的支配和统治吧!",
-        "name": "龙门巨龙纳特拉",
+        "name": "巨龙纳特拉",
         "upgradable": "无法升级",
         "position": "头肩,上衣,下装",
         "min_p": "23",
@@ -4671,7 +4671,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "pink",
-        "url": "https://ae01.alicdn.com/kf/H9e0fc880834f4257bf0756ea1f12e60eA.png"
+        "url": "https://ae01.alicdn.com/kf/H93ad597d52d949cfbc677d5d2ae211719.png"
     },
     {
         "file": "264",
@@ -4687,7 +4687,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "pink",
-        "url": "https://ae01.alicdn.com/kf/Hb3750a85850a4ea3a5871854d31b8f16Y.png"
+        "url": "https://ae01.alicdn.com/kf/H234d87ff7fd04776b9be9b0a940089fay.png"
     },
     {
         "file": "73",
@@ -4719,7 +4719,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "pink",
-        "url": "https://ae01.alicdn.com/kf/Hb5e0f57a82ac4383aedcec49f82d03f9p.png"
+        "url": "https://ae01.alicdn.com/kf/H65c7ed257f1f4d3881d1675474d6499bb.png"
     },
     {
         "file": "316",
@@ -4735,7 +4735,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "pink",
-        "url": "https://ae01.alicdn.com/kf/H1322c35cc7504c8e9718bcfdf5033be2D.png"
+        "url": "https://ae01.alicdn.com/kf/Hda50077e081c4564ac93c8b92c98df9c9.png"
     },
     {
         "file": "264",
@@ -4767,7 +4767,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "pink",
-        "url": "https://ae01.alicdn.com/kf/H3daab1da231446acafa285abeeb5984eK.png"
+        "url": "https://ae01.alicdn.com/kf/H4d744a2a05714df297b0c755085a4f52N.png"
     },
     {
         "file": "173",
@@ -4783,7 +4783,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "purples",
-        "url": "https://ae01.alicdn.com/kf/Ha82cbdbd304b47aa98eb7ae513e3592ad.png"
+        "url": "https://ae01.alicdn.com/kf/H12df7f76e66249a7b9181ee4ff434d70W.png"
     },
     {
         "file": "173",
@@ -4799,7 +4799,7 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "purples",
-        "url": "https://ae01.alicdn.com/kf/H0213b8ad9f6b4edd92567581ea1bd869l.png"
+        "url": "https://ae01.alicdn.com/kf/Hec2d41de380e40569c510feadc988a0cB.png"
     },
     {
         "file": "210",
@@ -4815,14 +4815,14 @@
         "hechengqi": "可以通过卡片合成器获得",
         "hecheng": "可以通过卡片合成获得。",
         "grade": "white",
-        "url": "https://ae01.alicdn.com/kf/Haa0822de15814c1e9c664ef281a9512aH.png"
+        "url": "https://ae01.alicdn.com/kf/H96afed638cef4b8eb5c46dfcd7b54211w.png"
     },
     {
         "file": "449",
         "game_shot": "370",
         "p_type": "所有属性强化",
         "extra": "",
-        "name": "宇由恶片宇宙恶魔:罗什(纯白",
+        "name": "宇宙恶魔:罗什(纯白)",
         "upgradable": "无法升级",
         "position": "魔法石",
         "min_p": "15",
@@ -5135,7 +5135,7 @@
         "hechengqi": "无法通过卡片合成器获得",
         "hecheng": "无法通过卡片合成获得。",
         "grade": "orange",
-        "url": "https://ae01.alicdn.com/kf/H2a3d6fe0027d41c08b55994e91876331e.png"
+        "url": "https://ae01.alicdn.com/kf/H4c829666d96b47138c0f467cc872b8c2j.png"
     },
     {
         "file": "483",

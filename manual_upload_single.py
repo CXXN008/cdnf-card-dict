@@ -1,7 +1,7 @@
 import requests
 from requests_toolbelt import MultipartEncoder
 
-filename = 'C:\\code\\cdnf-card-dict\\game_image_opt\\cn_card\\107.png'
+filename = 'C:/code/cdnf-card-dict/game_image_opt/cn_card/111.png'
 
 m = MultipartEncoder(
     fields={
