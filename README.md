@@ -43,6 +43,7 @@ build需要按需自行修改gh-pages/build.py
 ## Windows 客户端
 装`nativefier`
 
+then
 ```
 node gh-pages/build.js
 ```
