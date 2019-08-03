@@ -454,7 +454,7 @@ function setupEvent() {
 
 function showtoast() {
 	cameraControls.truckSpeed === 0.5 ? 0 : 0.5
-	toast.innerText = '当前缩放、平移速度:' + cameraControls.dollySpeed
+	toast.innerText = '鼠标控制速度:' + cameraControls.dollySpeed
 	toast.classList.add('show')
 }
 

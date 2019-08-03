@@ -40,5 +40,14 @@ npm run dev
 
 build需要按需自行修改gh-pages/build.py
 
+## Windows 客户端
+装`nativefier`
+
+```
+node gh-pages/build.js
+```
+
+使用脚本自动导出的Windows端native exe
+
 ## LICENSE
 ### MIT
