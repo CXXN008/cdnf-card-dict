@@ -661,6 +661,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log('image load ... OK')
 			transform(targets.cards, 1000)
 			animate()
+			console.log('报告数据错误,bug等，可以mail至:cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc');
+			console.log('再次脱坑前，大概都会维护吧- -');
 		})
 	})
 })
