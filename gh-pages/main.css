@@ -18,7 +18,7 @@ body {
 section > span{
 	font-size: 12px;
 	position: absolute;
-	z-index: 1;
+	z-index: 3;
 	cursor: pointer;
 	bottom: 0;
 	text-align: center;
@@ -411,7 +411,7 @@ a:active {
 }
 
 .text-focus-in {
-	animation: text-focus-in 1s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+	animation: text-focus-in .5s ease;
 }
 
 @keyframes text-focus-in {
@@ -426,7 +426,7 @@ a:active {
 }
 
 .scale-in-center {
-	animation: scale-in-center 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	animation: scale-in-center 0.1s ease;
 }
 
 @keyframes scale-in-center {
