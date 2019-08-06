@@ -644,7 +644,7 @@ function render() {
 }
 
 function initBackground() {
-	VANTA.CLOUDS({ el: '#container' })
+	VANTA.CLOUDS({ el: document.body })
 	console.log('background set ... OK')
 }
 
@@ -672,6 +672,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		initCard()
 		setupEvent()
+
+		//fix ff width
+		VANTA.current.resize()
 
 		// focus in effect
 
