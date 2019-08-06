@@ -143,10 +143,11 @@ const camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 100)
 const renderer = new THREE.CSS3DRenderer()
 camera.position.z = 6000
 renderer.setSize(width, height)
-document.getElementById('container').appendChild(renderer.domElement)
 // renderer.setClearColor( 0xffaa00, 1);
 
+document.getElementById('container').appendChild(renderer.domElement)
 const cameraControls = new CameraControls(camera, renderer.domElement)
+
 // cameraControls.addEventListener('change', render)
 // cameraControls = new OrbitControls(camera, renderer.domElement)
 cameraControls.minDistance = 10
@@ -297,16 +298,22 @@ function toggleFullscreen(event) {
 }
 
 function setupEvent() {
-	
 	document.querySelector('#txt_v').addEventListener(
 		'click',
 		() => {
 			console.log('click')
-			navigator.clipboard.writeText("cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc").then(function() {
-				showtoast('已复制信息至剪切板')
-			  }, function() {
-				showtoast('复制失败')
-			  });
+			navigator.clipboard
+				.writeText(
+					'cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc'
+				)
+				.then(
+					function() {
+						showtoast('已复制信息至剪切板')
+					},
+					function() {
+						showtoast('复制失败')
+					}
+				)
 		},
 		false
 	)
@@ -591,7 +598,7 @@ function transform(targets, duration) {
 }
 
 function onWindowResize() {
-	// camera.aspect = window.innerWidth / window.innerHeight
+	camera.aspect = window.innerWidth / window.innerHeight
 	renderer.setSize(window.innerWidth, window.innerHeight)
 	// console.log(VANTA);
 	VANTA.current.resize()
@@ -618,18 +625,18 @@ function getCurrentKeywords() {
 }
 
 function animate() {
+	// snip
 	const delta = clock.getDelta()
-	const elapsed = clock.getElapsedTime()
-	const updated = cameraControls.update(delta)
+	const hasControlsUpdated = cameraControls.update(delta)
 
 	requestAnimationFrame(animate)
 	TWEEN.update()
 
-	if (updated) {
-		render()
-		// console.log('rendered')
+	if ( hasControlsUpdated ) {
+
+		renderer.render( scene, camera );
+
 	}
-	// cameraControls.update()
 }
 
 function render() {
