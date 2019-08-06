@@ -15,6 +15,21 @@ body {
 	height: 100%;
 	overflow: hidden;
 }
+section > span{
+	font-size: 1px;
+	position: absolute;
+	z-index: 5;
+	cursor: pointer;
+	bottom: 0;
+	text-align: center;
+	max-lines: 0;
+	word-wrap: break-word;
+	overflow: hidden;
+	width: 80%;
+	left: 10%;
+	right: 10%;
+	background: transparent;
+}
 
 canvas {
 	display: block;

@@ -5,7 +5,8 @@
   "license": "MIT",
   "icon": "favicon.ico",
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.3",
+    "nativefier": "^7.6.12"
   },
   "homepage": "https://cccccccccccccccccccccccccccccccccccccc.github.io/cdnf-card-page/",
   "scripts": {
@@ -14,7 +15,6 @@
   },
   "dependencies": {
     "camera-controls": "^1.12.2",
-    "nativefier": "^7.6.12",
     "tween": "^0.9.0"
   }
 }

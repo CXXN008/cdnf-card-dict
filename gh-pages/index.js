@@ -297,6 +297,20 @@ function toggleFullscreen(event) {
 }
 
 function setupEvent() {
+	
+	document.querySelector('#txt_v').addEventListener(
+		'click',
+		() => {
+			console.log('click')
+			navigator.clipboard.writeText("cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc").then(function() {
+				showtoast('已复制信息至剪切板')
+			  }, function() {
+				showtoast('复制失败')
+			  });
+		},
+		false
+	)
+
 	toast.addEventListener(
 		'animationend',
 		a => {
@@ -423,16 +437,16 @@ function setupEvent() {
 			reset()
 		} else if (e.key === '+') {
 			cameraControls.dollySpeed +=
-				cameraControls.dollySpeed === 5 ? 0 : .5
+				cameraControls.dollySpeed === 5 ? 0 : 0.5
 			cameraControls.truckSpeed +=
-				cameraControls.truckSpeed === 5 ? 0 : .5
-			showtoast()
+				cameraControls.truckSpeed === 5 ? 0 : 0.5
+			showtoast('鼠标控制速度:' + cameraControls.dollySpeed)
 		} else if (e.key === '-') {
 			cameraControls.dollySpeed -=
-				cameraControls.dollySpeed === .5 ? 0 : .5
+				cameraControls.dollySpeed === 0.5 ? 0 : 0.5
 			cameraControls.truckSpeed -=
-				cameraControls.truckSpeed === .5 ? 0 : .5
-			showtoast()
+				cameraControls.truckSpeed === 0.5 ? 0 : 0.5
+			showtoast('鼠标控制速度:' + cameraControls.dollySpeed)
 		}
 	}
 	document.onkeyup = e => {
@@ -452,9 +466,8 @@ function setupEvent() {
 	console.log('Event setup ... OK')
 }
 
-function showtoast() {
-	cameraControls.truckSpeed === 0.5 ? 0 : 0.5
-	toast.innerText = '鼠标控制速度:' + cameraControls.dollySpeed
+function showtoast(s) {
+	toast.innerText = s
 	toast.classList.add('show')
 }
 
@@ -661,8 +674,10 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log('image load ... OK')
 			transform(targets.cards, 1000)
 			animate()
-			console.log('报告数据错误,bug等，可以mail至:cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc');
-			console.log('再次脱坑前，大概都会维护吧- -');
+			console.log(
+				'报告数据错误,bug等，可以mail至:cc@ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc'
+			)
+			console.log('再次脱坑前，大概都会维护吧- -')
 		})
 	})
 })
