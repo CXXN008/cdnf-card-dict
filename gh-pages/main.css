@@ -16,7 +16,7 @@ body {
 	overflow: hidden;
 }
 section > span{
-	font-size: 1px;
+	font-size: 12px;
 	position: absolute;
 	z-index: 5;
 	cursor: pointer;
