@@ -1,4 +1,6 @@
 # cdnf-card-dict
+
+online preview https://ccccccccccccccccccccccccccccccccccccccccccccccccccccccccc.cc/cdnf-card-page/
 ## 文件说明
 
 游戏操作需要安装pywin32
